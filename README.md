@@ -26,6 +26,11 @@ pip install dbt dbt-postgres
 ```bash
 cd dbt_scooters
 ```
+4. Активируйте PostGIS в базе PostgreSQL, если еще этого не делали:
+
+```sql
+create extension postgis schema public;
+```
 
 ## Конфигурация
 
