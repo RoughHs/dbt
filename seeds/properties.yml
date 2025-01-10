@@ -15,3 +15,8 @@ seeds:
     description: "Age groups to split users for analysis"
     config:
       delimiter: ","
+
+  - name: "first_name_sex"
+    description: "First name sex"
+    config:
+      delimiter: ","

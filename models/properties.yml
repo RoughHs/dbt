@@ -74,3 +74,6 @@ models:
 
   - name: 'trips_age_group'
     description: "Overall trips statistics by user age group"
+  
+  - name: 'users_full'
+    description: "Full users"

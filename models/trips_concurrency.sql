@@ -40,7 +40,8 @@ cumsum_cte as (
     select
         "timestamp",
         sum(increment) over (order by "timestamp") as concurrency,
-        preserve_row
+        preserve_row,
+        {{ updated_at() }}
     from
         sum_cte
 )
