@@ -45,6 +45,9 @@ models:
         - columns: ["date"]
   - name: 'trips_age_daily'
     description: "Trips age statistics"
+    data_tests:
+      - unique:
+          column_name: "date::text || age::text"
   
   - name: 'trips_age_daily_stat'
     description: "Overall Trips age statistics"
@@ -80,6 +83,11 @@ models:
     description: "Scooter satistics by company"
   - name: 'companies_trips'
     description: "Trip satistics by company"
+    columns:
+          - name: "company"
+            description: "Scooters manufacturing company"
+            data_tests:
+              - unique
   - name: 'events_full'
     description: "User events enriched with meaningful types"
     config:
