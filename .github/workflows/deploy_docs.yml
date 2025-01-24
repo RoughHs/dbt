@@ -1,17 +1,41 @@
-name: Super-Linter
+name: Deploy dbt docs (Data Catalog) to GitHub Pages
 
-on: push
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
 
 jobs:
-  super-lint:
-    name: Lint code base
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    timeout-minutes: 10
 
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+          
+      - name: Prepare connection profile
+        run: cp profiles.example.yml profiles.yml
+
+      - name: Generate docs
+        run: dbt docs generate
         env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DBT_ENV_SECRET_PASSWORD: ${{ secrets.DBT_ENV_SECRET_PASSWORD }}
+
+      - name: Prepare site files
+        run: |
+          mkdir site
+          cp target/index.html site/
+          cp target/manifest.json site/
+          cp target/catalog.json site/
+
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
