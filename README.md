@@ -50,3 +50,19 @@ create extension postgis schema public;
 - `dbt source freshness` - проверка актуальности данных в источниках
 
 - `dbt run-operation create_role --args "name: finance"` - создание роли в базе (на примере роли "finance")
+
+
+...
+## Каталог данных
+
+Каталог dbt, который автоматически обновляется из ветки `main`:
+
+https://inzhenerka.github.io/dbt-scooters
+
+...
+
+2. Установите dbt и другие зависимости:
+   
+```bash
+pip install -r requirements.txt
+```
