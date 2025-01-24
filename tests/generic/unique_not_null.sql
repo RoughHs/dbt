@@ -6,5 +6,5 @@ from
 group by
     1
 having
-    count(*) > 1 or {{ column_name }} is null
+    count(*) > 1 or "{{ column_name }}" is null
 {% endtest %}
