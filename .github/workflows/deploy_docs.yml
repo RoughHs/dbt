@@ -18,6 +18,11 @@ jobs:
 
       - name: Install requirements
         run: pip install -r requirements.txt
+
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+          dbt deps
           
       - name: Prepare connection profile
         run: cp profiles.example.yml profiles.yml
